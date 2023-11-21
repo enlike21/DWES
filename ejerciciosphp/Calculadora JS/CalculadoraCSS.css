@@ -1,0 +1,86 @@
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  background-color: darksalmon; 
+} 
+
+*{
+  font-family: 'Handjet', sans-serif;
+
+}
+
+.container{ 
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column; 
+} 
+fieldset { 
+  background-color: rgb(97, 128, 219); 
+  margin: 10px; 
+  justify-content: center; 
+  align-items: center; 
+  width: 15rem; 
+  border-radius: 10px; 
+  font-weight: bold; 
+} 
+
+ .entradas{ 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px; 
+    padding: 10px;
+    
+ } 
+
+  legend { 
+    background-color: lightblue; 
+    border-radius: 5px; 
+    padding: 5px; 
+  } 
+  button { 
+    background-color: lightblue; 
+    color: black; 
+    border: none; 
+    border-radius: 50%; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: xx-large; 
+
+  } 
+  button:hover{ 
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); 
+  } 
+  .sombra{ 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); 
+  } 
+  h1{ 
+    border: 2px solid #ccc; 
+    text-align: center; 
+    border-radius: 5px; 
+    background-color: rgb(207, 229, 248); 
+    padding: 10px; 
+    border: solid, #0c0c0c; 
+  }
+
+  .igual{
+    grid-column: span 2;
+  }
+  .C{
+    grid-column:span 4;
+    background-color: rgb(123, 255, 123);
+  }
+  .pantalla{
+    grid-column: span 4;
+    margin-top: 1rem;
+    width: 98%;
+    height: 120%;
+    background-color: beige;
+    font-size: 20px;
+    text-align: right;
+  }
