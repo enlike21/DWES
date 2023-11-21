@@ -8,27 +8,41 @@
 </head>
 
 <body>
-    <!-- Realizar un programa que muestre los archivos que contiene una carpeta
+    <!--Escribe un programa php que realice las siguientes acciones:
+
+Realizar un programa que muestre los archivos que contiene "C:"
 Cambia a la carpeta c:/
-Crea un directorio
-Lista solo los archivos que contengan una "2". Crea un fichero que cumpla.
-Lista solo los archivos que empiecen por a y terminen por z.Crea un fichero que cumpla.
-Lista solo los archivos que contengan números.Crea un fichero que cumpla.
-Lista solo los archivos de formato pdf.Crea un fichero que cumpla. -->
+Crea un directorio "pruebas".
+Entra en él.
+Lista solo los archivos que contengan una "2" en el nombre. 
+Si no hay ninguno, en php:
+Crea un nuevo fichero
+Introduce texto "este fichero contiene un 2 en el nombre".
+Cierra el fichero.
+Lista el fichero usando el filtro "contiene un 2 en el nombre".
+Lista solo los archivos que empiecen por a y terminen por z.
+Crea un fichero en el directorio para comprobarlo (puedes hacerlo desde el sistema operativo).
+Lista solo los archivos que contengan números.
+Crea un fichero en el directorio para comprobarlo (puedes hacerlo desde el sistema operativo).
+Lista solo los archivos de formato pdf.
+Crea un fichero en el directorio para comprobarlo (puedes hacerlo desde el sistema operativo).
+Desde php, lee un fichero de pruebas que hayas creado y muestralo por pantalla.-->
+
 <?php
-$folder = 'C:\ejerciciosphp\ficherosydirectorios';
+$folder = 'C:';
 
 // Compruebo si la carpeta existe
 if (is_dir($folder)) {
-    // Creo el directorio "guillen"
-    if (!is_dir("guillen")) {
-        mkdir("guillen");
+    chdir($folder);
+    // Creo el directorio "pruebas"
+    if (!is_dir("pruebas")) {
+        mkdir("pruebas");
     }
-    // Cambio al directorio "guillen"
-    chdir("guillen");
+    // Cambio al directorio "pruebas"
+    chdir("pruebas");
     // Creo un archivo llamado "Numero2" que cumpla con la condición
     $numero2 = fopen("Numero2.txt", "w");
-    fwrite($numero2, "Archivo con el número 2");
+    fwrite($numero2, "Archivo contiene el número 2 en el nombre");
     fclose($numero2);
     // Creo un archivo llamado "apaz" que cumpla con la condición
     $ayz = fopen("apaz.txt", "w");
@@ -75,7 +89,11 @@ if (is_dir($folder)) {
             }
         }
     }
+    $archivo ="./Numero2.txt";
+    $contenido = file_get_contents($archivo);
+    echo "<h1>El contenido del archivo Numero2.txt es:</h1> $contenido";
 } else {
     echo "La carpeta no existe.";
 }
+
 ?>
