@@ -24,7 +24,7 @@
             //SI LA CONTRASEÑA ES IGUAL A LO QUE NOS PIDE, HAGO UNA SESION Y MANDO AL USUARIO A OTRA PAGINA
             if($email=="usuario@gmail.com"&& $contraseña=="1234"){
                 $datos=["nombre"=>$email,"password"=>$contraseña];
-                $_SESSION["usuario"][]=$datos;
+                $_SESSION["usuario"]=$datos;
                 header("location:portal.php");
                 exit();
             }
