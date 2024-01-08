@@ -8,10 +8,32 @@ function generarDados($cantidad){
     return $dados;
 }
 
-function quitarDadoMasRepetido($dados){
+function quitarDadoMasRepetido($dados) {
+    $contador = array_count_values($dados);
+    $maxRepeticiones = max($contador);
+    $dadosFinales = [];
 
-    return $dados;
+    $dadosMasRepetidos = array_keys($contador, $maxRepeticiones);
+
+    if (count($dadosMasRepetidos) > 1) {
+        $dadoAleatorio = $dadosMasRepetidos[array_rand($dadosMasRepetidos)];
+
+        foreach ($dados as $dado) {
+            if ($dado != $dadoAleatorio) {
+                $dadosFinales[] = $dado;
+            }
+        }
+    } else {
+        foreach ($dados as $dado) {
+            if ($contador[$dado] != $maxRepeticiones) {
+                $dadosFinales[] = $dado;
+            }
+        }
+    }
+    return $dadosFinales;
 }
+
+
 
 function calcularPuntuacion($dados){
     return array_sum($dados);
