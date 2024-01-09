@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="utf-8">
   <title>HTML - Color botón</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="ejercicio1.css">
+  <link rel="stylesheet" href="estiloejercicio1.css">
 </head>
 
 <body>
@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit" name="eleccion" value="blue" id="blue"></button>
         <button type="submit" name="eleccion" value="green" id="green"></button>
         <button type="submit" name="eleccion" value="yellow" id="yellow"></button>
+        <br>
         <button type="submit" name="reiniciar" value="reiniciar">Reiniciar</button>
     </div>
 </form>

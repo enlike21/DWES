@@ -7,7 +7,7 @@ session_start();
   <meta charset="utf-8">
   <title>Colores Seleccionados</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="ejercicio1.css">
+  <link rel="stylesheet" href="estiloejercicio1.css">
 </head>
 
 <body>
