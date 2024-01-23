@@ -1,24 +1,20 @@
 <?php
 include_once "AnimalDomestico.php";
+include_once "Perro.php";
+include_once "Gato.php";
+include_once "Pajaro.php";
 
-$cambio = new AnimalDomestico("Buddy", 3, "Perro");
-$gato = new AnimalDomestico("Whiskers", 2, "Gato");
-$pajaro = new AnimalDomestico("Tweetie", 1, "Pajaro");
+$perro = new Perro("Patán", 3);
+$gato = new Gato("Don Gato", 2);
+$pajaro = new Pajaro("Piolín", 1);
 
+$perro->mostrarInformacion();
+$perro->ladrar();
 
-echo "<br><b>Información inicial:</b><br><br>";
-$cambio->mostrarInformacion();
 $gato->mostrarInformacion();
+$gato->maullar();
+
 $pajaro->mostrarInformacion();
-
-
-$cambio->setTipo("Alpaca"); 
-$cambio->setNombre("Flappy");
-$cambio->setEdad(2);
-
-echo "<br><b>Información actualizada:</b><br><br>";
-$cambio->mostrarInformacion();
-$gato->mostrarInformacion();
-$pajaro->mostrarInformacion();
+$pajaro->cantar();
 
 ?>

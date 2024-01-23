@@ -60,10 +60,8 @@ class AnimalDomestico {
             echo "Edad: " . $this->edad . " años<br>";
             echo "Tipo: " . $this->tipo . "<br>";
             echo "Número de patas: " . $this->patas . "<br>";
-            echo "-----<br>";
         } else if ($this->tipo === null || $this->edad < 0) {
             echo "Información no disponible debido a que la edad o el tipo del animal, no son válido.<br>";
-            echo "-----<br>";
         }
     }
 }
