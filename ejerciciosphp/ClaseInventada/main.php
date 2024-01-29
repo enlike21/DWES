@@ -9,9 +9,11 @@ $gato = new Gato("Don Gato", 2);
 $pajaro = new Pajaro("Piolín", 1);
 
 $perro->mostrarInformacion();
+$perro->jugar();
 $perro->ladrar();
 
 $gato->mostrarInformacion();
+$gato->dormir();
 $gato->maullar();
 
 $pajaro->mostrarInformacion();

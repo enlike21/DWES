@@ -1,6 +1,6 @@
 <?php
 
-class AnimalDomestico {
+class AnimalDomestico{
     private $nombre;
     private $edad;
     private $tipo;

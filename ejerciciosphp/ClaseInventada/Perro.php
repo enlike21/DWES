@@ -1,4 +1,5 @@
 <?php
+require_once "Funciones.php";
 class Perro extends AnimalDomestico {
 
     // Constructor para Perro
@@ -10,5 +11,18 @@ class Perro extends AnimalDomestico {
         echo "Guau! Guau!<br>";
         echo "-----<br>";
     }
+
+    public function comer() {
+        echo "{$this->getNombre()} está comiendo <br>.";
+    }
+
+    public function dormir() {
+        echo "{$this->getNombre()} está durmiendo <br>.";
+    }
+
+    public function jugar() {
+        echo "{$this->getNombre()} está jugando <br>.";
+    }
+
 }
 ?>
