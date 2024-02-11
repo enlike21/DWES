@@ -1,4 +1,4 @@
-<?php
+<?php3
 class Gato extends AnimalDomestico {
 
     // Constructor para Gato
