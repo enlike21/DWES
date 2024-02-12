@@ -24,7 +24,7 @@ require_once("../cbdd.php");
     $db = $baseDatos->getdb();
 
     // Prepara la consulta SQL para obtener los datos de los departamentos
-    $query = $db->prepare("SELECT nombre, presupuesto, sede_id from departamentos");
+    $query = $db->prepare("SELECT nombre, presupuesto, (select nombre from sedes where id = departamentos.sede_id) as nombre_sede from departamentos");
 
     // Ejecuta la consulta
     $query->execute();
@@ -32,7 +32,7 @@ require_once("../cbdd.php");
     // Vincula los resultados de la consulta a variables específicas
     $query->bindColumn('nombre', $nombre);
     $query->bindColumn('presupuesto', $presupuesto);
-    $query->bindColumn('sede_id', $id_sede);
+    $query->bindColumn('nombre_sede', $id_sede);
 
 
     ?>
@@ -65,7 +65,8 @@ require_once("../cbdd.php");
 
 
     <?php
-
+    $db=null;
+    $baseDatos->__destruct();
     // Libera el resultado y cierra la conexión
 
     ?>

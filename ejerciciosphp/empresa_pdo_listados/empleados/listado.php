@@ -16,7 +16,7 @@ require_once("../cbdd.php");
 </head>
 
 <body>
-    <h1>Listado de departamentos usando fetch (PDO::FETCH_ASSOC)</h1>
+    <h1>Listado de empleados usando fetch (PDO::FETCH_OBJ)</h1>
     <?php
 
     // Realiza la conexion a la base de datos a través de una función 
@@ -24,7 +24,15 @@ require_once("../cbdd.php");
     $db = $baseDatos->getdb();
 
     // Realiza la consulta a ejecutar en la base de datos en una variable
-    $query = $db->prepare("SELECT nombre, apellidos, email, salario, hijos, departamento_id  from empleados");
+    $query = $db->prepare("SELECT nombre, apellidos, email, salario, hijos,
+    (SELECT nombre FROM departamentos WHERE id = empleados.departamento_id) AS nombre_departamento, 
+    pais_id,
+    (SELECT nacionalidad FROM paises WHERE id = empleados.pais_id) AS nacionalidad, 
+    (SELECT nombre FROM sedes WHERE id = (SELECT sede_id FROM departamentos WHERE id = empleados.departamento_id)) AS nombre_sede
+    FROM empleados");
+
+
+
 
     // Ejecuta la consulta
     $query->execute();
@@ -53,9 +61,10 @@ require_once("../cbdd.php");
                 <td>{$empleado->nombre}</td>
                 <td>{$empleado->apellidos}</td>
                 <td>{$empleado->email}</td>
-                <td>{$empleado->salario}</td>
                 <td>{$empleado->hijos}</td>
-                <td>{$empleado->departamento_id}</td>
+                <td>{$empleado->salario}</td>
+                <td>{$empleado->nacionalidad}</td>
+                <td>{$empleado->nombre_departamento}</td>
                 <td>{$empleado->nombre_sede}</td>
               </tr>";
     }
@@ -65,11 +74,15 @@ require_once("../cbdd.php");
 
     <div class="contenedor">
         <div class="enlaces">
+            <p><a href="listado_ordenar.php">Ordenar los datos segun su categoria</a></p>
+            <p><a href="listado_filtrar.php">Ordenar los datos filtrando datos</a></p>
             <a href="../index.html">Volver a página de listados</a>
         </div>
     </div>
     <?php
 
+    $db=null;
+    $baseDatos->__destruct();
     // Libera el resultado y cierra la conexión
 
     ?>
