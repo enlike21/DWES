@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 class Database{
     private $server = "localhost";
     private $bbdd = "dwes_tarde_empresas";
-    private $user = "enrique";
+    private $user = "Enrique";
     private $password = "quique123";
 
     private $db;

@@ -119,7 +119,8 @@ $empleados = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
 
   <?php
-
+  $baseDatos->__destruct();
+  $db=null;
   // Libera el resultado y cierra la conexión
 
   ?>
