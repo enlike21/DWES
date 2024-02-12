@@ -42,52 +42,45 @@ require_once("../cbdd.php");
   </div>
   <?php
 
-  // Realiza la conexion a la base de datos a través de una función 
-  $baseDatos = new Database();
-  $db = $baseDatos->getdb();
-  // Obtenemos los valores del formulario de filtrado
-  $texto = isset($_POST['texto']) ? $_POST['texto'] : '';
-  $salarioMinimo = isset($_POST['salarioMinimo']) ? $_POST['salarioMinimo'] : null;
-  $salarioMaximo = isset($_POST['salarioMaximo']) ? $_POST['salarioMaximo'] : null;
-  $hijos = isset($_POST['hijos']) ? $_POST['hijos'] : '';
+require_once("../cbdd.php");
 
+$baseDatos = new Database();
+$db = $baseDatos->getdb();
 
-  // Crea las condicion de filtrado
-  if (!empty($texto)) {
-    $condicion = "(nombre LIKE $texto OR apellidos LIKE $texto OR email LIKE $texto)";
-  }
-  if (!is_null($salarioMinimo)) {
-    $condicion = "salario >= $salarioMinimo";
-  }
-  if (!is_null($salarioMaximo)) {
-    $condicion = "salario <= $salarioMaximo";
-  }
-  if (!empty($hijos)) {
-    $condicion = "hijos = $hijos";
-  }
+$texto = isset($_POST['texto']) ? $_POST['texto'] : '';
+$salarioMinimo = isset($_POST['salarioMinimo']) ? $_POST['salarioMinimo'] : null;
+$salarioMaximo = isset($_POST['salarioMaximo']) ? $_POST['salarioMaximo'] : null;
+$hijos = isset($_POST['hijos']) ? $_POST['hijos'] : '';
 
+$condiciones = [];
 
-  // Realiza la consulta a ejecutar en la base de datos en una variable
-  $query = "SELECT nombre, apellidos, email, salario, hijos,
-  (SELECT nombre FROM departamentos WHERE id = empleados.departamento_id) AS nombre_departamento, 
-  pais_id,
-  (SELECT nacionalidad FROM paises WHERE id = empleados.pais_id) AS nacionalidad, 
-  (SELECT nombre FROM sedes WHERE id = (SELECT sede_id FROM departamentos WHERE id = empleados.departamento_id)) AS nombre_sede
-  FROM empleados";
-  if (!empty($condicion)) {
-    $query .= " WHERE $condicion";
-  }
-  $stmt=$db->prepare($query);
-  $stmt->execute();
-  $empleados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if (!empty($texto)) {
+    $condiciones[] = "(nombre LIKE '%$texto%' OR apellidos LIKE '%$texto%' OR email LIKE '%$texto%')";
+}
+if (!is_null($salarioMinimo) && is_numeric($salarioMinimo)) {
+    $condiciones[] = "salario >= $salarioMinimo";
+}
+if (!is_null($salarioMaximo) && is_numeric($salarioMaximo)) {
+    $condiciones[] = "salario <= $salarioMaximo";
+}
+if (!empty($hijos)) {
+    $condiciones[] = "hijos = $hijos";
+}
 
-  // Obten el resultado de ejecutar la consulta para poder recorrerlo. El resultado es de tipo PDOStatement
+$query = "SELECT nombre, apellidos, email, salario, hijos,
+            (SELECT nombre FROM departamentos WHERE id = empleados.departamento_id) AS nombre_departamento, 
+            pais_id,
+            (SELECT nacionalidad FROM paises WHERE id = empleados.pais_id) AS nacionalidad, 
+            (SELECT nombre FROM sedes WHERE id = (SELECT sede_id FROM departamentos WHERE id = empleados.departamento_id)) AS nombre_sede
+            FROM empleados";
+if (!empty($condiciones)) {
+    $query .= " WHERE " . implode(" AND ", $condiciones);
+}
 
+$stmt = $db->query($query);
+$empleados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  // Muestra los criterios de búsqueda
-
-
-  ?>
+?>
 
   <table border="1" cellpadding="10">
     <thead>
